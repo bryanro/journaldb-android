@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/Users/Bryan/.gradle/caches/modules-2/files-2.1/com.squareup.retrofit/retrofit/1.8.0/a517f29ed06be2b2879524fcd94b6e9b36e2e0b5/retrofit-1.8.0.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="a517f29ed06be2b2879524fcd94b6e9b36e2e0b5">
+        <dex dex="/Users/Bryan/workspace/journaldb-android/app/build/intermediates/pre-dexed/debug/retrofit-1.8.0-2b75007826b991563f1c098331b63e2713db76ff.jar" />
+    </item>
+    <item
+        jar="/Users/Bryan/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.3/5fc52c41ef0239d1093a1eb7c3697036183677ce/gson-2.3.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="5fc52c41ef0239d1093a1eb7c3697036183677ce">
+        <dex dex="/Users/Bryan/workspace/journaldb-android/app/build/intermediates/pre-dexed/debug/gson-2.3-cc7f337235b401542cd36dfc54a7731cde0af804.jar" />
+    </item>
+    <item
+        jar="/Users/Bryan/android-sdk/extras/android/m2repository/com/android/support/support-v4/19.1.0/support-v4-19.1.0.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="85f201b380937e61a9dce6ca90ccf6872abbfb67">
+        <dex dex="/Users/Bryan/workspace/journaldb-android/app/build/intermediates/pre-dexed/debug/support-v4-19.1.0-d3bd83ed210e92305a413239443f2399014536de.jar" />
+    </item>
+
+</items>

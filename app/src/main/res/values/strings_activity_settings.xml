@@ -1,0 +1,28 @@
+<resources>
+    <string name="title_activity_settings">Settings</string>
+
+    <!-- Strings related to Settings -->
+
+    <string name="pref_header_general">General</string>
+
+    <string name="pref_name_hours_back">hours_back</string>
+    <string name="pref_title_hours_back">Hours Back</string>
+    <string-array name="pref_hours_back_list_titles">
+        <item>0</item>
+        <item>6</item>
+        <item>8</item>
+        <item>10</item>
+        <item>12</item>
+    </string-array>
+    <string-array name="pref_hours_back_list_values">
+        <item>0</item>
+        <item>6</item>
+        <item>8</item>
+        <item>10</item>
+        <item>12</item>
+    </string-array>
+
+    <string name="pref_name_host_url">host_url</string>
+    <string name="pref_title_host_url">Endpoint URL</string>
+
+</resources>

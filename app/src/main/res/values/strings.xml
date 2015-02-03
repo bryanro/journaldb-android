@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Journal DB</string>
+    <string name="action_settings">Settings</string>
+    <string name="base_url">http://192.168.56.1:3005/</string>
+    <string name="title_activity_create_entry">CreateEntryActivity</string>
+
+    <string name="date_suffix_yesterday">&#160;(yest)</string>
+    <string name="date_suffix_today">&#160;(today)</string>
+
+    <string name="btn_submit_new_entry">Submit New Entry</string>
+    <string name="btn_update_entry">Update Entry</string>
+
+    <string name="warning_no_url_set">Please set Host URL</string>
+</resources>
