@@ -13,4 +13,5 @@
     <string name="btn_update_entry">Update Entry</string>
 
     <string name="warning_no_url_set">Please set Host URL</string>
+    <string name="warning_no_auth_set">Please set Auth Username and Password</string>
 </resources>

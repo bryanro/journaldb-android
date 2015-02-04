@@ -13,4 +13,14 @@
         android:title="@string/pref_title_host_url"
         android:defaultValue=""
         />
+    <EditTextPreference
+        android:key="@string/pref_name_auth_username"
+        android:title="@string/pref_title_auth_username"
+        android:defaultValue=""
+        />
+    <EditTextPreference
+        android:key="@string/pref_name_auth_password"
+        android:title="@string/pref_title_auth_password"
+        android:defaultValue=""
+        />
 </PreferenceScreen>

@@ -52,6 +52,8 @@ public class MainActivity extends Activity {
 
     private SimpleDateFormat dateFormat;
     private String hostUrl;
+    private String authUsername;
+    private String authPassword;
 
     private static final String TAG = MainActivity.class.getSimpleName();
     Context context = this;
@@ -101,15 +103,25 @@ public class MainActivity extends Activity {
 
         String hostUrlPref = sharedPref.getString(getString(R.string.pref_name_host_url), "");
 
+        String authUsernamePref = sharedPref.getString(getString(R.string.pref_name_auth_username), "");
+        String authPasswordPref = sharedPref.getString(getString(R.string.pref_name_auth_password), "");
+
         // if host url isn't set, navigate directly to the settings screen
-        if (hostUrlPref.length() < 1) {
-            Toast.makeText(MainActivity.this, getString(R.string.warning_no_url_set), Toast.LENGTH_SHORT).show();
+        if (hostUrlPref.length() < 1 || authUsernamePref.length() < 1 || authPasswordPref.length() < 1) {
+            if (hostUrlPref.length() < 1) {
+                Toast.makeText(MainActivity.this, getString(R.string.warning_no_url_set), Toast.LENGTH_SHORT).show();
+            }
+            else if (authUsernamePref.length() < 1 || authPasswordPref.length() < 1) {
+                Toast.makeText(MainActivity.this, getString(R.string.warning_no_auth_set), Toast.LENGTH_SHORT).show();
+            }
             startActivity(new Intent(MainActivity.this, SettingsActivity.class));
             return;
         }
         else {
-            if (hostUrlPref != hostUrl) {
+            if (hostUrlPref != hostUrl || authUsernamePref != authUsername || authPasswordPref != authPassword) {
                 hostUrl = hostUrlPref;
+                authUsername = authUsernamePref;
+                authPassword = authPasswordPref;
                 setupJournalService();
             }
 
@@ -132,9 +144,12 @@ public class MainActivity extends Activity {
                 .setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
                 .create();
 
+        JournalRequestInterceptor journalRequestInterceptor = new JournalRequestInterceptor();
+        journalRequestInterceptor.setEncodedCredentials(authUsername, authPassword);
+
         RestAdapter restAdapter = new RestAdapter.Builder()
                 .setEndpoint(hostUrl)
-                .setRequestInterceptor(new JournalRequestInterceptor())
+                .setRequestInterceptor(journalRequestInterceptor)
                 .setConverter(new GsonConverter(gsonConv))
                 .build();
 

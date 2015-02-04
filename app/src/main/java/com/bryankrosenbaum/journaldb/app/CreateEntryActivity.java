@@ -47,6 +47,8 @@ public class CreateEntryActivity extends Activity {
 
     private SimpleDateFormat dateFormat;
     private String hostUrl;
+    private String authUsername;
+    private String authPassword;
 
     private boolean isUpdate;
 
@@ -68,6 +70,9 @@ public class CreateEntryActivity extends Activity {
 
         sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         hostUrl = sharedPref.getString(getString(R.string.pref_name_host_url), "");
+
+        authUsername = sharedPref.getString(getString(R.string.pref_name_auth_username), "");
+        authPassword = sharedPref.getString(getString(R.string.pref_name_auth_password), "");
 
         setupJournalService();
 
@@ -103,9 +108,12 @@ public class CreateEntryActivity extends Activity {
                 .setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
                 .create();
 
+        JournalRequestInterceptor journalRequestInterceptor = new JournalRequestInterceptor();
+        journalRequestInterceptor.setEncodedCredentials(authUsername, authPassword);
+
         RestAdapter restAdapter = new RestAdapter.Builder()
                 .setEndpoint(hostUrl)
-                .setRequestInterceptor(new JournalRequestInterceptor())
+                .setRequestInterceptor(journalRequestInterceptor)
                 .setConverter(new GsonConverter(gsonConv))
                 .build();
 
