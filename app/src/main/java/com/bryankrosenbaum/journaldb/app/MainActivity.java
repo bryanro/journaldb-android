@@ -9,8 +9,10 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.view.GestureDetector;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.ImageView;
@@ -38,7 +40,6 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 import retrofit.converter.GsonConverter;
 
-
 public class MainActivity extends Activity {
 
     private JournalService journalService;
@@ -48,7 +49,7 @@ public class MainActivity extends Activity {
     private TextView textviewDate;
     private ListView listviewPreviousEntries;
     private SharedPreferences sharedPref;
-    private ProgressBar progressbarSpinner;
+    private GestureDetector gestureDetector;
 
     private SimpleDateFormat dateFormat;
     private String hostUrl;
@@ -56,6 +57,12 @@ public class MainActivity extends Activity {
     private String authPassword;
 
     private static final String TAG = MainActivity.class.getSimpleName();
+
+    // swipe constants
+    private static final int SWIPE_MAX_OFF_PATH = 400;
+    private static final int SWIPE_MIN_DISTANCE = 400;
+    private static final int SWIPE_THRESHOLD_VELOCITY = 0;
+
     Context context = this;
 
     @Override
@@ -69,6 +76,15 @@ public class MainActivity extends Activity {
         dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
         sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+
+        gestureDetector = new GestureDetector(this, new MyGestureListener());
+        listviewPreviousEntries.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                gestureDetector.onTouchEvent(motionEvent);
+                return false;
+            }
+        });
     }
 
     @Override
@@ -282,5 +298,42 @@ public class MainActivity extends Activity {
     public void dateLabelClick(View view) {
         new DatePickerDialog(this, onDateSetListener, selectedDate.get(Calendar.YEAR)
                 , selectedDate.get(Calendar.MONTH), selectedDate.get(Calendar.DAY_OF_MONTH)).show();
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event){
+        this.gestureDetector.onTouchEvent(event);
+        return super.onTouchEvent(event);
+    }
+
+    class MyGestureListener extends GestureDetector.SimpleOnGestureListener {
+        @Override
+        public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+            try {
+                if (Math.abs(e1.getY() - e2.getY()) > SWIPE_MAX_OFF_PATH || Math.abs(velocityX) < SWIPE_THRESHOLD_VELOCITY) {
+                    Log.d(TAG, "swipe vertical was too large ("
+                            + Math.abs(e1.getY() - e2.getY()) + "), or velocity was too low (" + Math.abs(velocityX) + ")");
+                    return false;
+                }
+                else {
+                    // right to left swipe: increment date
+                    if(e1.getX() - e2.getX() > SWIPE_MIN_DISTANCE) {
+                        selectedDate.add(Calendar.DATE, 1);
+                        setHeaderDate();
+                        refreshEntries();
+                    }
+                    // left to right: decrement date
+                    else if (e2.getX() - e1.getX() > SWIPE_MIN_DISTANCE) {
+                        selectedDate.add(Calendar.DATE, -1);
+                        setHeaderDate();
+                        refreshEntries();
+                    }
+                    return false;
+                }
+            } catch (Exception e) {
+                // nothing
+            }
+            return false;
+        }
     }
 }

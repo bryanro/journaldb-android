@@ -57,6 +57,9 @@
         android:layout_height="wrap_content"
         android:id="@+id/listviewPreviousEntries"
         android:layout_alignParentBottom="false"
-        android:layout_below="@+id/dividerMain" />
+        android:layout_below="@+id/dividerMain"
+        android:clickable="false"
+        android:focusable="false"
+        android:focusableInTouchMode="true" />
 
 </RelativeLayout>

@@ -44,4 +44,9 @@ public class JournalAdapter extends ArrayAdapter<Journal> {
 
         return view;
     }
+
+    @Override
+    public boolean isEnabled(int position) {
+        return false;
+    }
 }
