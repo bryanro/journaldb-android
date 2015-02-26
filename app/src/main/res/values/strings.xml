@@ -14,4 +14,8 @@
 
     <string name="warning_no_url_set">Please set Host URL</string>
     <string name="warning_no_auth_set">Please set Auth Username and Password</string>
+
+    <string name="create_entry_hint_today">What did you do today?</string>
+    <string name="create_entry_hint_yesterday">What did you do yesterday?</string>
+    <string name="create_entry_hint_specific_date">What did you do on %1$s?</string>
 </resources>

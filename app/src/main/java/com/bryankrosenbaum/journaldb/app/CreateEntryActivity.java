@@ -59,7 +59,7 @@ public class CreateEntryActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_entry);
 
-        dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        dateFormat = new SimpleDateFormat("yyyy-MM-dd (EEE)");
 
         textviewEntryDate = (TextView) findViewById(R.id.textviewEntryDate);
         edittextEntry = (EditText) findViewById(R.id.edittextEntry);
@@ -134,13 +134,16 @@ public class CreateEntryActivity extends Activity {
 
         long selectedDateTime = selectedDate.getTimeInMillis();
         if (selectedDateTime == todayTime) {
-            textviewEntryDate.setText(dateFormat.format(selectedDate.getTime()) + getString(R.string.date_suffix_today));
+            textviewEntryDate.setText(dateFormat.format(selectedDate.getTime()));
+            edittextEntry.setHint(getString(R.string.create_entry_hint_today));
         }
         else if (selectedDateTime == yesterdayTime) {
-            textviewEntryDate.setText(dateFormat.format(selectedDate.getTime()) + getString(R.string.date_suffix_yesterday));
+            textviewEntryDate.setText(dateFormat.format(selectedDate.getTime()));
+            edittextEntry.setHint(getString(R.string.create_entry_hint_yesterday));
         }
         else {
             textviewEntryDate.setText(dateFormat.format(selectedDate.getTime()));
+            edittextEntry.setHint(String.format(getString(R.string.create_entry_hint_specific_date), dateFormat.format(selectedDate.getTime())));
         }
     }
 

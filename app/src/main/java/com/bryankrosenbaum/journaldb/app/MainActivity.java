@@ -73,7 +73,7 @@ public class MainActivity extends Activity {
         listviewPreviousEntries = (ListView) findViewById(R.id.listviewPreviousEntries);
         textviewDate = (TextView) findViewById(R.id.textviewDate);
 
-        dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        dateFormat = new SimpleDateFormat("yyyy-MM-dd (EEE)");
 
         sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
 
